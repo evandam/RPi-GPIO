@@ -1,0 +1,29 @@
+{% load staticfiles %}
+<!DOCTYPE HTML>
+<html>
+<head>
+<title> GPIO </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="{% static "gpio/jquery.js" %}" type="text/javascript"></script>
+<script src="{% static "gpio/gpio.js" %}" type="text/javascript"></script>
+</head>
+<body>
+{% if switches %}
+	<table>
+	{% for switch in switches %}
+		<tr>
+			<td> <a href="{% url 'switch' switch.id 0 %}">
+				<input type="button" value="OFF" />
+			</a> </td>
+			<th> {{ switch.name }} </th>
+			<td> <a href="{% url 'switch' switch.id 1 %}">
+				<input type="button" value="ON" />
+			</a> </td>
+		</tr>
+	{% endfor %}
+	</table>
+{% else %}
+	<p> No switches configured! </p>
+{% endif %}
+</body>
+</html>
